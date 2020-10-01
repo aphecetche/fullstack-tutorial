@@ -2,7 +2,9 @@ const { paginateResults } = require('./utils');
 
 module.exports = {
     Query: {
-        launches: async (_, { pageSize = 20, after }, { dataSources }) => {
+        launches: async (_, { pageSize = 20, after }, context) => {
+            const { dataSources } = context
+            console.log("context=",context)
             const allLaunches = await dataSources.launchAPI.getAllLaunches();
             // we want these in reverse chronological order
             allLaunches.reverse();
